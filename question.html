@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Question ❤️</title>
+    <style>
+        body {text-align:center;font-family:Arial;background:#ffd6e0;padding-top:100px;}
+        h1 {font-size:2.5em;}
+        .btn {padding:15px 25px;font-size:1.2em;border:none;border-radius:25px;cursor:pointer;margin:20px;}
+        #yes {background:#ff4d6d;color:white;}
+        #no {background:grey;color:white;position:absolute;}
+    </style>
+</head>
+<body>
+<h1>Will you be my girlfriend? ❤️</h1>
+<button id="yes" class="btn" onclick="yesClick()">YES 😍</button>
+<button id="no" class="btn" onmouseover="moveButton()">NO 😅</button>
+<script>
+function moveButton(){
+let btn=document.getElementById("no");
+let x=Math.random()*window.innerWidth*0.8;
+let y=Math.random()*window.innerHeight*0.8;
+btn.style.left=x+"px";
+btn.style.top=y+"px";
+}
+function yesClick(){window.location.href="congrats.html";}
+</script>
+</body>
+</html>
