@@ -36,7 +36,7 @@
             z-index:999;
         }
 
-        .contract {
+        .box {
             background:white;
             color:black;
             padding:30px;
@@ -52,14 +52,13 @@
             to {opacity:1; transform:scale(1);}
         }
 
-        .agree-btn {
+        .btn {
             margin-top:20px;
             padding:12px 25px;
             border:none;
             border-radius:20px;
             background:#ff4d6d;
             color:white;
-            font-size:1em;
             cursor:pointer;
         }
 
@@ -88,24 +87,58 @@
             50% {border-color:transparent;}
         }
 
-        /* Main hidden content */
         #mainContent {
             display:none;
         }
 
+        h1 {font-size:2.5em;}
+
+        /* Paper vows */
+        .vows {
+            max-width:600px;
+            margin:30px auto;
+            font-size:1.2em;
+            line-height:1.6;
+            padding:25px;
+
+            background:#fffef8;
+            color:#333;
+            border-radius:10px;
+
+            box-shadow:0 10px 25px rgba(0,0,0,0.3);
+
+            background-image:repeating-linear-gradient(
+                to bottom,
+                #fffef8,
+                #fffef8 28px,
+                #eaeaea 29px
+            );
+
+            white-space:pre-line;
+            overflow:hidden;
+            border-right:3px solid #333;
+        }
+
+        .typing::after {
+            content:"|";
+            animation:blink 0.7s infinite;
+            color:#333;
+        }
+
+        /* Gallery */
         .gallery img {
             width:250px;
             height:300px;
             margin:10px;
             border-radius:15px;
             object-fit:cover;
+            transition:transform 0.4s ease, box-shadow 0.4s ease;
         }
 
-        .vows {
-            max-width:600px;
-            margin:20px auto;
-            font-size:1.2em;
-            line-height:1.6;
+        .gallery img:hover {
+            transform:scale(1.2);
+            box-shadow:0 10px 25px rgba(0,0,0,0.6);
+            z-index:2;
         }
 
     </style>
@@ -113,9 +146,21 @@
 
 <body>
 
-<!-- CONTRACT -->
-<div class="overlay" id="overlay">
-    <div class="contract">
+<!-- STEP 1: Screenshot message -->
+<div class="overlay" id="intro">
+    <div class="box">
+        <h2>📸 Quick Reminder</h2>
+        <p>
+            Before continuing, please take a photo or screenshot of the contract…  
+            you might want to keep this moment forever 💖
+        </p>
+        <button class="btn" onclick="showContract()">Continue ❤️</button>
+    </div>
+</div>
+
+<!-- STEP 2: Contract -->
+<div class="overlay" id="contractBox" style="display:none;">
+    <div class="box">
         <h2>Relationship Contract 📜❤️</h2>
 
         <p>
@@ -126,10 +171,9 @@
             <b>from today until eternity.</b> 💖
         </p>
 
-        <!-- Signature animation -->
         <div class="signature">Seatshogeng Moseri</div>
 
-        <button class="agree-btn" onclick="acceptContract()">I Agree ❤️</button>
+        <button class="btn" onclick="acceptContract()">I Agree ❤️</button>
     </div>
 </div>
 
@@ -139,16 +183,7 @@
 <h1>Congratulations ❤️🥺</h1>
 <p>You just made me the happiest person alive.</p>
 
-<div class="vows">
-    I promise to be a loving, loyal, and committed boyfriend.<br><br>
-
-    I will always support you, stand by you, and protect your heart.<br><br>
-
-    I’ll make you laugh when you're sad, hold you when you need comfort,  
-    and remind you every day how special you are.<br><br>
-
-    I choose you — today, tomorrow, and always. 💖
-</div>
+<div class="vows typing" id="vowsText"></div>
 
 <div class="gallery">
     <img src="us (1).jpeg">
@@ -160,9 +195,34 @@
 </div>
 
 <script>
+function showContract(){
+    document.getElementById("intro").style.display = "none";
+    document.getElementById("contractBox").style.display = "flex";
+}
+
+const text = `I promise to be a loving, loyal, and committed boyfriend.
+
+I will always support you, stand by you, and protect your heart.
+
+I’ll make you laugh when you're sad, hold you when you need comfort,
+and remind you every day how special you are.
+
+I choose you — today, tomorrow, and always. 💖`;
+
+let i = 0;
+
+function typeWriter() {
+    if (i < text.length) {
+        document.getElementById("vowsText").textContent += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 30);
+    }
+}
+
 function acceptContract(){
-    document.getElementById("overlay").style.display = "none";
+    document.getElementById("contractBox").style.display = "none";
     document.getElementById("mainContent").style.display = "block";
+    typeWriter();
 }
 </script>
 
