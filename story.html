@@ -4,21 +4,23 @@
     <title>Our Story</title>
     <style>
         body {
+            margin: 0;
             font-family: Arial;
             text-align: center;
             padding: 20px;
-            animation: bgChange 8s infinite alternate;
-            color: white;
             overflow-x: hidden;
+            color: white;
+
+            /* NEW gradient background */
+            background: linear-gradient(270deg, #ff758c, #ff7eb3, #6a11cb, #2575fc);
+            background-size: 800% 800%;
+            animation: gradientMove 10s ease infinite;
         }
 
-        /* Background animation */
-        @keyframes bgChange {
-            0% { background: #000000; }
-            25% { background: #1a1a00; }
-            50% { background: #333300; }
-            75% { background: #666600; }
-            100% { background: #999900; }
+        @keyframes gradientMove {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
         }
 
         /* Teddy movement */
@@ -52,7 +54,7 @@
             100% { transform: rotate(0deg); }
         }
 
-        /* Main heart drop */
+        /* Heart drop */
         .heart {
             position: absolute;
             top: 70px;
@@ -86,19 +88,12 @@
         .heart5 { left: 48%; animation-delay: 7s; }
 
         @keyframes floatUp {
-            0% {
-                opacity: 0;
-                transform: translateY(0) scale(0.8);
-            }
-            20% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-150px) scale(1.2);
-            }
+            0% { opacity: 0; transform: translateY(0) scale(0.8); }
+            20% { opacity: 1; }
+            100% { opacity: 0; transform: translateY(-150px) scale(1.2); }
         }
 
+        /* Gallery */
         .gallery img {
             width: 250px;
             height: 300px;
@@ -118,8 +113,8 @@
             display: inline-block;
             margin-top: 20px;
             padding: 15px 25px;
-            background: #ff4d6d;
-            color: white;
+            background: white;
+            color: #ff4d6d;
             text-decoration: none;
             border-radius: 25px;
         }
